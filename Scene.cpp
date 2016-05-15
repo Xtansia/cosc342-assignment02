@@ -45,9 +45,6 @@ RayIntersection Scene::intersect(const Ray &ray) const {
             }
         }
     }
-    for (auto &obj: objects_) {
-        auto hits = obj->intersect(ray);
-    }
     return firstHit;
 }
 
@@ -59,9 +56,35 @@ Colour Scene::computeColour(const Ray &viewRay, unsigned int rayDepth) const {
 
     Colour hitColour = ambientLight * hitPoint.material.ambientColour;
 
+    Normal &normal = hitPoint.normal;
+    Normal unitNormal = normal / normal.norm();
+
     Material &mat = hitPoint.material;
+
+    Direction lightDirection;
+    Direction unitLightDirection;
+    Ray rayFromHitPoint;
+    rayFromHitPoint.point = hitPoint.point;
+    RayIntersection lightHitPoint;
+    Colour diffuseColour;
+
     for (auto &light : lights_) {
-        // Check if we can see this light
+        lightDirection = light->location - hitPoint.point;
+        unitLightDirection = lightDirection / lightDirection.norm();
+
+        // Check if we can see this light by forming the ray p_h + t(p_l - p_h)
+        // and then checking for an obstruction in 0 < t < 1
+        rayFromHitPoint.direction = lightDirection;
+        lightHitPoint = intersect(rayFromHitPoint);
+        if (lightHitPoint.distance > 0 && lightHitPoint.distance < 1)
+            continue; // Found an obstruction, skip this light
+
+        // Calculate diffuse colour (Lambertian) provided by this light source
+        diffuseColour = mat.diffuseColour * unitLightDirection.dot(unitNormal);
+
+        // TODO: Calculate specular colour (Phong) provided by this light source
+
+        hitColour += light->getIntensityAt(hitPoint.point) * light->colour * (diffuseColour);
     }
 
     hitColour.clip();
