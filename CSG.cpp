@@ -1,4 +1,5 @@
 /* $Rev: 250 $ */
+#include <algorithm>
 #include "CSG.h"
 
 #include "utility.h"
