@@ -54,19 +54,19 @@ Colour Scene::computeColour(const Ray &viewRay, unsigned int rayDepth) const {
         return backgroundColour;
     }
 
-    Colour hitColour = ambientLight * hitPoint.material.ambientColour;
-
-    Normal &normal = hitPoint.normal;
-    Normal unitNormal = normal / normal.norm();
-
     Material &mat = hitPoint.material;
+    Normal unitNormal = hitPoint.normal / hitPoint.normal.norm();
 
+    Colour hitColour = ambientLight * mat.ambientColour;
+    Colour diffuseColour;
+    Colour specularColour;
+
+    Direction eyeDirection = -viewRay.direction;
+    Direction unitEyeDirection = eyeDirection / eyeDirection.norm();
     Direction lightDirection;
     Direction unitLightDirection;
-    Ray rayFromHitPoint;
-    rayFromHitPoint.point = hitPoint.point;
-    RayIntersection lightHitPoint;
-    Colour diffuseColour;
+    Direction reflectedLightDirection;
+    Direction unitReflectedLightDirection;
 
     for (auto &light : lights_) {
         lightDirection = light->location - hitPoint.point;
@@ -74,17 +74,28 @@ Colour Scene::computeColour(const Ray &viewRay, unsigned int rayDepth) const {
 
         // Check if we can see this light by forming the ray p_h + t(p_l - p_h)
         // and then checking for an obstruction in 0 < t < 1
-        rayFromHitPoint.direction = lightDirection;
-        lightHitPoint = intersect(rayFromHitPoint);
-        if (lightHitPoint.distance > 0 && lightHitPoint.distance < 1)
-            continue; // Found an obstruction, skip this light
+        Ray shadowRay;
+        shadowRay.point = Point(hitPoint.point);
+        shadowRay.direction = Direction(lightDirection);
+        RayIntersection shadowIntersection = intersect(shadowRay);
+        if (shadowIntersection.distance < 1) {
+            // Found an obstruction, skip this light
+            continue;
+        }
 
         // Calculate diffuse colour (Lambertian) provided by this light source
         diffuseColour = mat.diffuseColour * unitLightDirection.dot(unitNormal);
 
-        // TODO: Calculate specular colour (Phong) provided by this light source
+        // Calculate the direction of the reflected light, r = 2n(l.n)-l
+        reflectedLightDirection = 2 * unitNormal * unitLightDirection.dot(unitNormal) - unitLightDirection;
+        unitReflectedLightDirection = reflectedLightDirection / reflectedLightDirection.norm();
 
-        hitColour += light->getIntensityAt(hitPoint.point) * light->colour * (diffuseColour);
+        // Calculate specular colour (Phong) provided by this light source
+        specularColour =
+                mat.specularColour * std::pow(unitEyeDirection.dot(unitReflectedLightDirection), mat.specularExponent);
+
+        // Add the diffuse and specular colours multiplied by the light source's illumination
+        hitColour += light->getIntensityAt(hitPoint.point) * light->colour * (diffuseColour + specularColour);
     }
 
     hitColour.clip();
