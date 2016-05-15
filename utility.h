@@ -11,6 +11,11 @@
  * \brief General utility functions.
  */
 
+/** If M_PI isn't defined on this system, provide our own. */
+#ifndef M_PI
+constexpr auto M_PI = 3.14159265358979323846;
+#endif
+
 const double epsilon = 1e-6; //!< Small number for checking when things are almost zero
 
 const double infinity = std::numeric_limits<double>::max(); //!< Very large number, bigger than any sensible distance
