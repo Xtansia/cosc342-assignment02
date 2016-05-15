@@ -4,8 +4,10 @@ dist: trusty
 compiler:
   - clang
   - gcc
-os: linux
+os: 
+  - linux
+  - osx
 before_install: 
-  - sudo apt-get -qq update
-  - sudo apt-get install -y libopencv-core-dev libopencv-highgui-dev
+  - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt-get -qq update && sudo apt-get install -y libopencv-core-dev libopencv-highgui-dev; fi
+  - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew tap homebrew/science && brew install llvm opencv; fi
 script: mkdir build && cd build && cmake .. && make
