@@ -1,7 +1,10 @@
 language: cpp
+sudo: required
+dist: trusty
 compiler:
 	- clang
 	- gcc
+os: linux
 before_install: 
   - sudo apt-get -qq update
   - sudo apt-get install -y libopencv-core-dev libopencv-highgui-dev
