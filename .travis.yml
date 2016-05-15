@@ -2,8 +2,8 @@ language: cpp
 sudo: required
 dist: trusty
 compiler:
-	- clang
-	- gcc
+  - clang
+  - gcc
 os: linux
 before_install: 
   - sudo apt-get -qq update
