@@ -8,6 +8,10 @@ os:
   - linux
   - osx
 before_install: 
-  - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt-get -qq update && sudo apt-get install -y libopencv-core-dev libopencv-highgui-dev; fi
-  - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew tap homebrew/science && brew install llvm opencv; fi
-script: mkdir build && cd build && cmake .. && make
+  - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt-get -qq update && sudo apt-get install -y libopencv-dev; fi
+  - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew tap homebrew/science && brew install opencv; fi
+before_script:
+  - mkdir build
+  - cd build
+  - cmake ..
+script: make
