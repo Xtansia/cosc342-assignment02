@@ -29,24 +29,24 @@ class RayIntersection {
 
 public:
 
-	Point point; //!< The Point at which a Ray intersects with an Object.
-	Normal normal; //!< The Normal at the Point of intersection.
-	Material material; //!< The Material of the Object that is hit.
-	double distance; //!< The distance along the Ray to the intersection Point.
+    Point point; //!< The Point at which a Ray intersects with an Object.
+    Normal normal; //!< The Normal at the Point of intersection.
+    Material material; //!< The Material of the Object that is hit.
+    double distance; //!< The distance along the Ray to the intersection Point.
 
-	/** \brief Less-than comparison for RayIntersection.
-	 * 
-	 * In order to sort RayIntersection objects using the standard algorithms
-	 * a less-than operator is required. This is defined in terms of the distance
-	 * property, which provides a natural ordering for multipe Object intersections 
-	 * for a single Ray.
-	 *
-	 * \param ri The RayIntersection to compare to \c this
-	 * \return true if \c this.distance is less than \c ri.distance, false otherwise.
-	 */
-	bool operator<(const RayIntersection& ri) {
-		return distance < ri.distance;
-	}
+    /** \brief Less-than comparison for RayIntersection.
+     *
+     * In order to sort RayIntersection objects using the standard algorithms
+     * a less-than operator is required. This is defined in terms of the distance
+     * property, which provides a natural ordering for multipe Object intersections
+     * for a single Ray.
+     *
+     * \param ri The RayIntersection to compare to \c this
+     * \return true if \c this.distance is less than \c ri.distance, false otherwise.
+     */
+    bool operator<(const RayIntersection &ri) {
+        return distance < ri.distance;
+    }
 
 };
 

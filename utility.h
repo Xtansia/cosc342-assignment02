@@ -31,7 +31,7 @@ const double infinity = std::numeric_limits<double>::max(); //!< Very large numb
  * \return The angle measured in radians.
  */
 inline double deg2rad(double deg) {
-	return deg*M_PI/180;
+    return deg * M_PI / 180;
 }
 
 /** 
@@ -45,7 +45,7 @@ inline double deg2rad(double deg) {
  * \return The angle measured in degrees.
  */
 inline double rad2deg(double rad) {
-	return rad*180/M_PI;
+    return rad * 180 / M_PI;
 }
 
 
@@ -59,9 +59,9 @@ inline double rad2deg(double rad) {
  * \return 0, +1, or -1 depending on the sign of \c val.
  */
 inline int sign(double val) {
-	if (std::abs(val) < epsilon) return 0;
-	if (val < 0) return -1;
-	return 1;
+    if (std::abs(val) < epsilon) return 0;
+    if (val < 0) return -1;
+    return 1;
 }
 
 #endif // UTILITY_H_INCLUDED

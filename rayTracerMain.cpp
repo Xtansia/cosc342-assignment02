@@ -20,21 +20,21 @@
  * is a Camera specified.
  * 
  */
-int main (int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
 
-	Scene scene;
-	
-	SceneReader reader(&scene);
-	
-	for (int i = 1; i < argc; ++i) {
-		reader.read(argv[i]);
-	}
+    Scene scene;
 
-	if (scene.hasCamera()) {
-		scene.render();
-	} else {
-		std::cerr << "Cannot render a scene with no camera!" << std::endl;
-	}
+    SceneReader reader(&scene);
 
-	return 0;
+    for (int i = 1; i < argc; ++i) {
+        reader.read(argv[i]);
+    }
+
+    if (scene.hasCamera()) {
+        scene.render();
+    } else {
+        std::cerr << "Cannot render a scene with no camera!" << std::endl;
+    }
+
+    return 0;
 }

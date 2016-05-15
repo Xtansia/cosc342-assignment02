@@ -20,8 +20,8 @@
  */
 class Ray {
 public:
-	Point point; //!< The starting Point for the Ray.
-	Direction direction; //!< The Direction for the Ray.
+    Point point; //!< The starting Point for the Ray.
+    Direction direction; //!< The Direction for the Ray.
 };
 
 #endif

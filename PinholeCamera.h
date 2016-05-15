@@ -9,7 +9,7 @@
 /** \file
  * \brief PinholeCamera class header file
  */
- 
+
 /**
  * \brief PinholeCamera class.
  *
@@ -23,46 +23,46 @@ class PinholeCamera : public Camera {
 
 public:
 
-	/**
-	 * \brief PinholeCamera constructor.
-	 *
-	 * This creates a new PinholeCamera with the camera centre at the origin,
-	 * looking along the positive Z-axis. The focal length is provided as 
-	 * a parameter (default: 1 unit). The position and orientation of a Camera
-	 * can be altered via its transform member.
-	 *
-	 * \param f The focalLength of the new camera.
-	 */
-	PinholeCamera(double f = 1);
+    /**
+     * \brief PinholeCamera constructor.
+     *
+     * This creates a new PinholeCamera with the camera centre at the origin,
+     * looking along the positive Z-axis. The focal length is provided as
+     * a parameter (default: 1 unit). The position and orientation of a Camera
+     * can be altered via its transform member.
+     *
+     * \param f The focalLength of the new camera.
+     */
+    PinholeCamera(double f = 1);
 
-	/** \brief PinholeCamera copy constructor.
-	 *
-	 * \param camera The PinholeCamera to copy to \c this.
-	 */
-	PinholeCamera(const PinholeCamera& camera);
+    /** \brief PinholeCamera copy constructor.
+     *
+     * \param camera The PinholeCamera to copy to \c this.
+     */
+    PinholeCamera(const PinholeCamera &camera);
 
-	/** \brief PinholeCamera destructor. */
-	~PinholeCamera();
+    /** \brief PinholeCamera destructor. */
+    ~PinholeCamera();
 
-	/** \brief PinholeCamera assignment operator.
-	 *
-	 * \param camera The PinholeCamera to assign to \c this.
-	 * \return A reference to \c this to allow for chaining of assignments.
-	 */
-	PinholeCamera& operator=(const PinholeCamera& camera);
+    /** \brief PinholeCamera assignment operator.
+     *
+     * \param camera The PinholeCamera to assign to \c this.
+     * \return A reference to \c this to allow for chaining of assignments.
+     */
+    PinholeCamera &operator=(const PinholeCamera &camera);
 
-	/** \brief Generate a ray for a given image plane co-ordinate
-	 *
-	 * For a untransformed PinholeCamera the ray starts at the origin
-	 * and passes through (x, y, focalLength).
-	 *
-	 * \param x the horizontal location
-	 * \param y the vertical location
-	 * \return The Ray that passes from the Camera through (x,y) in the image plane.
-	 */
-	Ray castRay(double x, double y) const;
+    /** \brief Generate a ray for a given image plane co-ordinate
+     *
+     * For a untransformed PinholeCamera the ray starts at the origin
+     * and passes through (x, y, focalLength).
+     *
+     * \param x the horizontal location
+     * \param y the vertical location
+     * \return The Ray that passes from the Camera through (x,y) in the image plane.
+     */
+    Ray castRay(double x, double y) const;
 
-	double focalLength; //!< The distance from the camera centre to the image plane.
+    double focalLength; //!< The distance from the camera centre to the image plane.
 
 private:
 

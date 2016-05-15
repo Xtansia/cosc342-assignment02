@@ -35,45 +35,45 @@
  */
 class Object {
 public:
-	
-	/** \brief Object-Ray intersection computation.
-	 *
-	 * Given a Ray in space, this finds the point(s) of intersection with the surface of the 
-	 * Object. Note that there may be 0, 1, or more intersection points, and so a std::vector
-	 * of RayIntersections is returned.
-	 *
-	 * The details of this depend on the geometry of the particular Object, so this is a 
-	 * pure virtual method.
-	 *
-	 * \param ray The Ray to intersect with this Object.
-	 * \return A list (std::vector) of intersections, which may be empty.
-	 */
-	virtual std::vector<RayIntersection> intersect(const Ray& ray) const = 0;
 
-	Transform transform; //!< A 3D transformation to apply to this Object.
-	
-	Material material; //!< The colour and reflectance properties of the Object.
+    /** \brief Object-Ray intersection computation.
+     *
+     * Given a Ray in space, this finds the point(s) of intersection with the surface of the
+     * Object. Note that there may be 0, 1, or more intersection points, and so a std::vector
+     * of RayIntersections is returned.
+     *
+     * The details of this depend on the geometry of the particular Object, so this is a
+     * pure virtual method.
+     *
+     * \param ray The Ray to intersect with this Object.
+     * \return A list (std::vector) of intersections, which may be empty.
+     */
+    virtual std::vector<RayIntersection> intersect(const Ray &ray) const = 0;
+
+    Transform transform; //!< A 3D transformation to apply to this Object.
+
+    Material material; //!< The colour and reflectance properties of the Object.
 
 protected:
 
-	/** \brief Object default constructor. */
-	Object();
+    /** \brief Object default constructor. */
+    Object();
 
-	/** \brief Object copy constructor.
-	 *
-	 * \param object The Object to copy to \c this.
-	 */
-	Object(const Object& object);
+    /** \brief Object copy constructor.
+     *
+     * \param object The Object to copy to \c this.
+     */
+    Object(const Object &object);
 
-	/** \brief Object destructor. */
-	virtual ~Object();
+    /** \brief Object destructor. */
+    virtual ~Object();
 
-	/** \brief Object assignment operator. 
-	 *
-	 * \param object The Object to assign to \c this.
-	 * \return A reference to \c this to allow for chaining of assignment.
-	 */
-	const Object& operator=(const Object& object);
+    /** \brief Object assignment operator.
+     *
+     * \param object The Object to assign to \c this.
+     * \return A reference to \c this to allow for chaining of assignment.
+     */
+    const Object &operator=(const Object &object);
 
 };
 

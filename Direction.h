@@ -25,43 +25,43 @@ class Direction : public Vector {
 public:
 
     /** \brief Direction default constructor. */
-	Direction();
-	
-	/** \brief Direction X-Y-Z constructor.
-	 * 
-	 * This creates a Direction Vector with the specified X-, Y-, and Z-components.
-	 *
-	 * \param x The X-component of the Direction Vector.
-	 * \param y The Y-component of the Direction Vector.
-	 * \param z The Z-component of the Direction Vector.
-	 */
-	Direction(double x, double y, double z);
+    Direction();
 
-	/** \brief Direction copy constructor.
-	 *
-	 * \param direction The Direction to copy to \c this.
-	 */
-	Direction(const Direction& direction);
+    /** \brief Direction X-Y-Z constructor.
+     *
+     * This creates a Direction Vector with the specified X-, Y-, and Z-components.
+     *
+     * \param x The X-component of the Direction Vector.
+     * \param y The Y-component of the Direction Vector.
+     * \param z The Z-component of the Direction Vector.
+     */
+    Direction(double x, double y, double z);
 
-	/** \brief Direction from Vector constructor.
-	 *
-	 * Arithmetic operations on Direction objects use the Vector implementations.
-	 * This means that the result is a Vector, and this allows them to be converted to 
-	 * Direction objects.
-	 *
-	 * \param vector The Vector to copy to \c this.
-	 */
-	Direction(const Vector& vector);
+    /** \brief Direction copy constructor.
+     *
+     * \param direction The Direction to copy to \c this.
+     */
+    Direction(const Direction &direction);
 
-	/** \brief Direction from Matrix constructor.
-	 *
-	 * Some operations on Direction objects use the Matrix implementations.
-	 * This means that the result is a Matrix, and this allows them to be converted to 
-	 * Direction objects.
-	 *
-	 * \param matrix The Matrix to copy to \c this.
-	 */
-	Direction(const Matrix& matrix);
+    /** \brief Direction from Vector constructor.
+     *
+     * Arithmetic operations on Direction objects use the Vector implementations.
+     * This means that the result is a Vector, and this allows them to be converted to
+     * Direction objects.
+     *
+     * \param vector The Vector to copy to \c this.
+     */
+    Direction(const Vector &vector);
+
+    /** \brief Direction from Matrix constructor.
+     *
+     * Some operations on Direction objects use the Matrix implementations.
+     * This means that the result is a Matrix, and this allows them to be converted to
+     * Direction objects.
+     *
+     * \param matrix The Matrix to copy to \c this.
+     */
+    Direction(const Matrix &matrix);
 
 };
 

@@ -27,30 +27,30 @@
 class NonCopyable {
 protected:
 
-	/** \brief NonCopyable default constructor. */
-	NonCopyable() {}
+    /** \brief NonCopyable default constructor. */
+    NonCopyable() { }
 
-	/** \brief NonCopyable destructor. */
-	~NonCopyable() {}
+    /** \brief NonCopyable destructor. */
+    ~NonCopyable() { }
 
 
 private:
 
-	/** \brief NonCopyable copy constructor. 
-	 * 
-	 * Note that there is no implementation for the copy constructor.
-	 * You cannot copy construct NonCopyable objects.
-	 */
-	NonCopyable(const NonCopyable& /**< NOT USED*/);
+    /** \brief NonCopyable copy constructor.
+     *
+     * Note that there is no implementation for the copy constructor.
+     * You cannot copy construct NonCopyable objects.
+     */
+    NonCopyable(const NonCopyable & /**< NOT USED*/);
 
-	/** \brief NonCopyable assignment operator. 
-	 * 
-	 * Note that there is no implementation for the assignment operator.
-	 * You cannot assign NonCopyable objects.
-	 *
-	 * \return Nothing - you cannot assign NonCopyable objects.
-	 */
-	NonCopyable& operator=(const NonCopyable& /**< NOT USED*/);
+    /** \brief NonCopyable assignment operator.
+     *
+     * Note that there is no implementation for the assignment operator.
+     * You cannot assign NonCopyable objects.
+     *
+     * \return Nothing - you cannot assign NonCopyable objects.
+     */
+    NonCopyable &operator=(const NonCopyable & /**< NOT USED*/);
 
 };
 
