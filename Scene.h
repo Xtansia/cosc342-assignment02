@@ -219,20 +219,17 @@ private:
      *
      * The Colour seen by a Ray depends on the ligthing, the first Object that it
      * hits, and the Material properties of that Object. This method performs these
-     * computations and comptues the observed Colour. For some Objects it may be necessary
+     * computations and computes the observed Colour. For some Objects it may be necessary
      * to cast other Rays to deal with reflections. This can conceivably recurse forever,
      * so a maximum number of reflections is set.
      *
      * If the Ray does not hit any Object, then the Scene's backgroundColour should be
      * returned.
      *
-     * \todo Currently this method only deals with ambient lighting and Material properties.
-     *       It needs to be extended to account for the diffuse, specular, and mirror properties
-     *       of the Material of the Object that is hit. Recall from lectures that the formula for
-     *       a combination of ambient, diffuse, and specular lighting is
-     *       \f[ I = I_ak_a + \sum_j{I_j\left( k_d(\hat{\mathbf{\ell}}_j\cdot\hat{\mathbf{n}}) + k_s(\hat{\mathbf{e}}\cdot\hat{\mathbf{r}}_j)^n \right)},\f]
-     *       where the sum is over the LightSources in the Scene.
-     *       You will also need to cast additional Rays to check for shadows and for reflections.
+     * \todo Currently this method deals with ambient lighting, diffuse shading, specular shading and shadows.
+     *       It needs to be extended to account for the mirror properties
+     *       of the Material of the Object that is hit.
+     *       You will also need to cast additional Rays to check for reflections.
      *       The number of recursions made for reflections should be limited by the
      *       rayDepth parameter passed to this method.
      *

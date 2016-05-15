@@ -3,7 +3,7 @@ COSC342 - Assignment 02 - Ray Tracer
 
 ## TODO	
 - Diffuse (Lambertian) shading - DONE
-- Specular (Phong) shading
+- Specular (Phong) shading - DONE
 - Shadows cast by objects - DONE?
 - Mirror reflections
 - Rendering of cones
