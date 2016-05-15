@@ -14,3 +14,9 @@ set(SOURCE_FILES Camera.cpp Camera.h Colour.cpp Colour.h Cone.cpp Cone.h CSG.cpp
         SceneReader.cpp SceneReader.h Sphere.cpp Sphere.h Transform.cpp Transform.h utility.h Vector.cpp Vector.h)
 add_executable(rayTracer ${SOURCE_FILES})
 target_link_libraries(rayTracer ${OpenCV_LIBS})
+
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+    add_custom_target(doc ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generating API documentation with Doxygen" VERBATIM)
+endif(DOXYGEN_FOUND)
