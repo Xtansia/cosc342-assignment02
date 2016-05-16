@@ -226,13 +226,6 @@ private:
      * If the Ray does not hit any Object, then the Scene's backgroundColour should be
      * returned.
      *
-     * \todo Currently this method deals with ambient lighting, diffuse shading, specular shading and shadows.
-     *       It needs to be extended to account for the mirror properties
-     *       of the Material of the Object that is hit.
-     *       You will also need to cast additional Rays to check for reflections.
-     *       The number of recursions made for reflections should be limited by the
-     *       rayDepth parameter passed to this method.
-     *
      * \param viewRay The Ray to intersect with the Objects in the Scene.
      * \param rayDepth The maximum number of reflection Rays that can be cast.
      * \return The Colour observed by the viewRay.

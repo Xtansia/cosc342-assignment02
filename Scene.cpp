@@ -98,6 +98,19 @@ Colour Scene::computeColour(const Ray &viewRay, unsigned int rayDepth) const {
         hitColour += light->getIntensityAt(point) * light->colour * (diffuseColour + specularColour);
     }
 
+    // Check for ray depth to prevent infinite recursion
+    // Also check the hit materials mirror colour isn't tiny, to prevent unnecesary reflection recursion
+    if (rayDepth > 0 && mat.mirrorColour.red > epsilon && mat.mirrorColour.green > epsilon && mat.mirrorColour.blue > epsilon) {
+        // Cast reflection ray, r = 2n(e.n)-e
+        Ray reflectionRay;
+        reflectionRay.point = point;
+        reflectionRay.direction = 2 * unitNormal * unitEyeDirection.dot(unitNormal) - unitEyeDirection;
+
+        // Get the colour at to be reflected
+        Colour reflectedColour = computeColour(reflectionRay, rayDepth - 1);
+        hitColour += mat.mirrorColour * reflectedColour;
+    }
+
     hitColour.clip();
 
     return hitColour;

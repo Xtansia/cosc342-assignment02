@@ -4,7 +4,7 @@ COSC342 - Assignment 02 - Ray Tracer
 ## TODO	
 - Diffuse (Lambertian) shading - DONE
 - Specular (Phong) shading - DONE
-- Shadows cast by objects - DONE?
-- Mirror reflections
+- Shadows cast by objects - DONE - (slight issue of mismatch with lighting_expected)
+- Mirror reflections - DONE
 - Rendering of cones
 - Rendering of CSG intersection
