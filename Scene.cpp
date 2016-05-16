@@ -56,6 +56,7 @@ Colour Scene::computeColour(const Ray &viewRay, unsigned int rayDepth) const {
 
     Material &mat = hitPoint.material;
     Normal unitNormal = hitPoint.normal / hitPoint.normal.norm();
+    Point &point = hitPoint.point;
 
     Colour hitColour = ambientLight * mat.ambientColour;
     Colour diffuseColour;
@@ -68,17 +69,17 @@ Colour Scene::computeColour(const Ray &viewRay, unsigned int rayDepth) const {
     Direction reflectedLightDirection;
     Direction unitReflectedLightDirection;
 
+    Ray shadowRay;
+    shadowRay.point = point;
+
     for (auto &light : lights_) {
-        lightDirection = light->location - hitPoint.point;
+        lightDirection = light->location - point;
         unitLightDirection = lightDirection / lightDirection.norm();
 
         // Check if we can see this light by forming the ray p_h + t(p_l - p_h)
         // and then checking for an obstruction in 0 < t < 1
-        Ray shadowRay;
-        shadowRay.point = Point(hitPoint.point);
-        shadowRay.direction = Direction(lightDirection);
-        RayIntersection shadowIntersection = intersect(shadowRay);
-        if (shadowIntersection.distance < 1) {
+        shadowRay.direction = lightDirection;
+        if (intersect(shadowRay).distance < 1) {
             // Found an obstruction, skip this light
             continue;
         }
@@ -94,7 +95,7 @@ Colour Scene::computeColour(const Ray &viewRay, unsigned int rayDepth) const {
         specularColour = mat.specularColour * std::pow(std::max(unitEyeDirection.dot(unitReflectedLightDirection), 0.0), mat.specularExponent);
 
         // Add the diffuse and specular colours multiplied by the light source's illumination
-        hitColour += light->getIntensityAt(hitPoint.point) * light->colour * (diffuseColour + specularColour);
+        hitColour += light->getIntensityAt(point) * light->colour * (diffuseColour + specularColour);
     }
 
     hitColour.clip();
