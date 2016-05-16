@@ -55,8 +55,6 @@ public:
 
     /** \brief Cone-Ray intersection computation.
      *
-     * \todo Currently this method does no object intersections. This needs to be updated.
-     *
      * The intersection of a Ray with the curved face of a Cone comes down to a quadratic formula
      * of the form \f$at^2 + bt + c = 0\f$, where \f$t\f$ is the distance along the Ray, and
      * \f$a\f$, \f$b\f$, and \f$c\f$ are some constants. The solutions for \f$t\f$ are given by
