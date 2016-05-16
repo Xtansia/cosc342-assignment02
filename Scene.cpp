@@ -84,15 +84,14 @@ Colour Scene::computeColour(const Ray &viewRay, unsigned int rayDepth) const {
         }
 
         // Calculate diffuse colour (Lambertian) provided by this light source
-        diffuseColour = mat.diffuseColour * unitLightDirection.dot(unitNormal);
+        diffuseColour = mat.diffuseColour * std::max(unitLightDirection.dot(unitNormal), 0.0);
 
         // Calculate the direction of the reflected light, r = 2n(l.n)-l
         reflectedLightDirection = 2 * unitNormal * unitLightDirection.dot(unitNormal) - unitLightDirection;
         unitReflectedLightDirection = reflectedLightDirection / reflectedLightDirection.norm();
 
         // Calculate specular colour (Phong) provided by this light source
-        specularColour =
-                mat.specularColour * std::pow(unitEyeDirection.dot(unitReflectedLightDirection), mat.specularExponent);
+        specularColour = mat.specularColour * std::pow(std::max(unitEyeDirection.dot(unitReflectedLightDirection), 0.0), mat.specularExponent);
 
         // Add the diffuse and specular colours multiplied by the light source's illumination
         hitColour += light->getIntensityAt(hitPoint.point) * light->colour * (diffuseColour + specularColour);
