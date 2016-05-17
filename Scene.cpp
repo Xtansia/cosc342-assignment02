@@ -48,6 +48,23 @@ RayIntersection Scene::intersect(const Ray &ray) const {
     return firstHit;
 }
 
+bool Scene::isInShadowFromLight(const Point &point, const std::shared_ptr<LightSource> &light) const {
+    Ray shadowRay;
+    shadowRay.point = Point(point);
+    shadowRay.direction = Direction(light->location - point);
+
+    for (auto &obj : objects_) {
+        std::vector<RayIntersection> hits = obj->intersect(shadowRay);
+        for (auto &hit : hits) {
+            if (hit.distance > 0.0 && hit.distance < 1.0) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
 Colour Scene::computeColour(const Ray &viewRay, unsigned int rayDepth) const {
     RayIntersection hitPoint = intersect(viewRay);
     if (hitPoint.distance == infinity) {
@@ -62,27 +79,18 @@ Colour Scene::computeColour(const Ray &viewRay, unsigned int rayDepth) const {
     Colour diffuseColour;
     Colour specularColour;
 
-    Direction eyeDirection = -viewRay.direction;
-    Direction unitEyeDirection = eyeDirection / eyeDirection.norm();
-    Direction lightDirection;
+    Direction unitEyeDirection = -viewRay.direction / viewRay.direction.norm();
     Direction unitLightDirection;
     Direction reflectedLightDirection;
     Direction unitReflectedLightDirection;
 
-    Ray shadowRay;
-    shadowRay.point = point;
-
     for (auto &light : lights_) {
-        lightDirection = light->location - point;
-        unitLightDirection = lightDirection / lightDirection.norm();
+        unitLightDirection = light->location - point;
+        unitLightDirection /= unitLightDirection.norm();
 
-        // Check if we can see this light by forming the ray p_h + t(p_l - p_h)
-        // and then checking for an obstruction in 0 < t < 1
-        shadowRay.direction = lightDirection;
-        if (intersect(shadowRay).distance < 1) {
-            // Found an obstruction, skip this light
+        // Check if we can see this light
+        if (isInShadowFromLight(point, light))
             continue;
-        }
 
         // Calculate diffuse colour (Lambertian) provided by this light source
         diffuseColour = mat.diffuseColour * std::max(unitLightDirection.dot(unitNormal), 0.0);

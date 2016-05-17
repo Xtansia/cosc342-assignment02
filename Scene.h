@@ -215,6 +215,14 @@ private:
      */
     RayIntersection intersect(const Ray &ray) const;
 
+    /** \brief Check if a Point is in shadow from a LightSource
+     *
+     * \param point The point to check if is in shadow.
+     * \param light The LightSource to check if the Point is in shadow from.
+     * \return true if the Point is in shadow from the LightSource.
+     */
+    bool isInShadowFromLight(const Point &point, const std::shared_ptr<LightSource> &light) const;
+
     /** \brief Compute the Colour seen by a Ray in the Scene.
      *
      * The Colour seen by a Ray depends on the ligthing, the first Object that it
