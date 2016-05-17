@@ -55,10 +55,6 @@ public:
 
     /** \brief CSG-Ray csg computation.
      *
-     * \todo This method does not have an valid implementation for
-     * the CSG operations. It needs to be completed. There are
-     * four TODO marks in CSG.cpp where you will need to add code.
-     *
      * CSG combines two objects into one, using some boolean
      * operation, such as union, intersection, or
      * difference. (Note that either or both of these child

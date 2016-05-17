@@ -76,7 +76,7 @@ std::vector<RayIntersection> CSG::intersect(const Ray &ray) const {
 
     // We will assume that an odd number of intersections
     // indicates being inside an object. This is not correct for
-    // glancing intersections. These artefacts could be fixed, up
+    // glancing intersections. These artifacts could be fixed, up
     // to a point, by tracing a ray in the reverse direction and
     // looking for object intersections, however for this ray
     // tracer, we will just live with the (rare) glitches.
@@ -102,23 +102,70 @@ std::vector<RayIntersection> CSG::intersect(const Ray &ray) const {
         if (rIi == numRightIs ||
             (lIi < numLeftIs && leftIntersections[lIi] < rightIntersections[rIi])
                 ) {
-            // TODO: process leftIntersections[lIi]
+            // process leftIntersections[lIi]
+
+            possibleIntersection.point = transform.apply(Point(leftIntersections[lIi].point));
+            possibleIntersection.normal = transform.apply(Normal(leftIntersections[lIi].normal));
+            possibleIntersection.material = leftIntersections[lIi].material;
+            possibleIntersection.distance = (possibleIntersection.point - ray.point).norm() * sign(leftIntersections[lIi].distance);
+
+            if (previousLeftState == OUTSIDE) {
+                leftState = BORDER;
+            } else if (previousLeftState == INSIDE) {
+                leftState = BORDER;
+            }
+
             lIi++;
         } else {
-            // TODO: process rightIntersections[lIi]
+            // process rightIntersections[lIi]
+
+            possibleIntersection.point = transform.apply(Point(rightIntersections[rIi].point));
+            possibleIntersection.normal = transform.apply(Normal(rightIntersections[rIi].normal));
+            possibleIntersection.material = rightIntersections[rIi].material;
+            possibleIntersection.distance = (possibleIntersection.point - ray.point).norm() * sign(rightIntersections[rIi].distance);
+
+            if (previousRightState == OUTSIDE) {
+                rightState = BORDER;
+            } else if (previousRightState == INSIDE) {
+                rightState = OUTSIDE;
+            }
+
             rIi++;
         }
 
-        // TODO: Check the possible intersection against the
+        // Check the possible intersection against the
         // csg_table to see if it is actually a hitpoint of
         // the overall CSG object.  If it is a hitpoint, add
         // it to the result.
+        if (csg_table[leftState][rightState] == BORDER || csg_table[leftState][rightState] == INSIDE) {
+            if (possibleIntersection.normal.dot(ray.direction) > 0) {
+                possibleIntersection.normal = -possibleIntersection.normal;
+            }
+            result.push_back(possibleIntersection);
+        }
 
-        // TODO: Update the left and/or the right tree to
+        // Update the left and/or the right tree to
         // ensure that they advance beyond their BORDER state,
         // as the tracing ray resumes its progression through
         // the scene.
 
+        if (leftState == BORDER) {
+            if (previousLeftState == OUTSIDE) {
+                leftState = INSIDE;
+            } else if (previousLeftState == INSIDE) {
+                leftState = OUTSIDE;
+            }
+        }
+        if (rightState == BORDER) {
+            if (previousRightState == OUTSIDE) {
+                rightState = INSIDE;
+            } else if (previousRightState == INSIDE) {
+                rightState = OUTSIDE;
+            }
+        }
+
+        previousLeftState = leftState;
+        previousRightState = rightState;
     }
     return result;
 }
