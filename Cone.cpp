@@ -40,14 +40,13 @@ std::vector<RayIntersection> Cone::intersect(const Ray &ray) const {
     double b = 2 * pntX * dirX + 2 * pntY * dirY - 2 * pntZ * dirZ;
     double c = pntX * pntX + pntY * pntY - pntZ * pntZ;
 
-    double dStart = (1 - pntZ) / dirZ;
-    double dEnd = (0 - pntZ) / dirZ;
+    double dEnd = (1 - pntZ) / dirZ;
 
     RayIntersection hit;
     hit.material = material;
 
     double b2_4ac = b * b - 4 * a * c;
-    double d;
+    double d, z;
     switch (sign(b2_4ac)) {
         case -1:
             // No intersections
@@ -55,7 +54,8 @@ std::vector<RayIntersection> Cone::intersect(const Ray &ray) const {
         case 0:
             // One intersection
             d = -b / (2 * a);
-            if (d > dStart && d < dEnd) {
+            z = pntZ + d * dirZ;
+            if (z >= 0 && z <= 1) {
                 // Intersection is in front of the ray's start point
                 hit.point = transform.apply(Point(inverseRay.point + d * inverseRay.direction));
 
@@ -74,7 +74,8 @@ std::vector<RayIntersection> Cone::intersect(const Ray &ray) const {
         case 1:
             // Two intersections
             d = (-b + sqrt(b * b - 4 * a * c)) / (2 * a);
-            if (d > dStart && d < dEnd) {
+            z = pntZ + d * dirZ;
+            if (z >= 0 && z <= 1) {
                 // Intersection is in front of the ray's start point
                 hit.point = transform.apply(Point(inverseRay.point + d * inverseRay.direction));
 
@@ -91,7 +92,8 @@ std::vector<RayIntersection> Cone::intersect(const Ray &ray) const {
             }
 
             d = (-b - sqrt(b * b - 4 * a * c)) / (2 * a);
-            if (d > dStart && d < dEnd) {
+            z = pntZ + d * dirZ;
+            if (z >= 0 && z <= 1) {
                 // Intersection is in front of the ray's start point
                 hit.point = transform.apply(Point(inverseRay.point + d * inverseRay.direction));
 
@@ -117,10 +119,10 @@ std::vector<RayIntersection> Cone::intersect(const Ray &ray) const {
     // Base circle
     if (std::abs(dirZ) > epsilon) {
         // Find intersect with plane Z=1
-        d = dStart;
+        d = dEnd;
         Point intersection = inverseRay.point + d * inverseRay.direction;
         // Check intersection is in base circle
-        if (intersection(0) * intersection(0) + intersection(1) * intersection(1) < 1) {
+        if (intersection(0) * intersection(0) + intersection(1) * intersection(1) <= 1) {
             hit.point = transform.apply(Point(intersection));
             hit.normal = transform.apply(Normal(0, 0, 1));
             hit.distance = (hit.point - ray.point).norm() * sign(d);
