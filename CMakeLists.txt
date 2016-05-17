@@ -11,7 +11,7 @@ set(SOURCE_FILES Camera.cpp Camera.h Colour.cpp Colour.h Cone.cpp Cone.h CSG.cpp
         Display.cpp Display.h LightSource.cpp LightSource.h Material.h Matrix.cpp Matrix.h NonCopyable.h
         Normal.cpp Normal.h Object.cpp Object.h PinholeCamera.cpp PinholeCamera.h Point.cpp Point.h
         PointLightSource.cpp PointLightSource.h Ray.h RayIntersection.h rayTracerMain.cpp Scene.cpp Scene.h
-        SceneReader.cpp SceneReader.h Sphere.cpp Sphere.h Transform.cpp Transform.h utility.h Vector.cpp Vector.h)
+        SceneReader.cpp SceneReader.h Sphere.cpp Sphere.h Transform.cpp Transform.h utility.h Vector.cpp Vector.h Cube.cpp Cube.h)
 add_executable(rayTracer ${SOURCE_FILES})
 target_link_libraries(rayTracer ${OpenCV_LIBS})
 

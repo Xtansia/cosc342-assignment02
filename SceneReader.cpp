@@ -11,6 +11,7 @@
 #include "Sphere.h"
 #include "Cone.h"
 #include "CSG.h"
+#include "Cube.h"
 
 #include <algorithm>
 #include <iostream>
@@ -237,6 +238,8 @@ void SceneReader::parseObjectBlock(std::queue<std::string> &tokenBlock) {
         object = scene_->newObject<Sphere>();
     } else if (objectType == "CONE") {
         object = scene_->newObject<Cone>();
+    } else if (objectType == "CUBE") {
+        object = scene_->newObject<Cube>();
     } else if (objectType == "CSG") {
         std::string csgType = tokenBlock.front();
         tokenBlock.pop();

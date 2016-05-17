@@ -1,0 +1,47 @@
+Scene
+    ambientLight 0.2 0.2 0.2
+    renderSize 400 300
+    backgroundColour 0.2 0.2 0.2
+    filename TestScenes/hollow_cube.png
+End
+
+Object CSG Difference
+    Object Cube
+        Colour 1 0 0 
+    End
+
+    Object Sphere
+        Scale 1.2
+
+        Colour 0 1 0
+    End
+End
+
+Object CSG Intersection
+    Object Sphere
+        Colour 0 0 1
+    End
+
+    Object Cube
+        Scale 0.8
+        Rotate Y 45
+
+        Colour 0.5 0 0.5
+    End
+
+    Scale 0.5
+    Rotate X 45
+End
+
+Camera PinholeCamera 3
+    rotate X -15
+    translate 0 -2.5 -7.5
+End
+
+Light PointLight
+    Location -5 0 -10
+    Colour 50 50 50 
+End
+
+
+
