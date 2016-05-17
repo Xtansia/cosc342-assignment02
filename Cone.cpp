@@ -58,7 +58,12 @@ std::vector<RayIntersection> Cone::intersect(const Ray &ray) const {
             if (d > dStart && d < dEnd) {
                 // Intersection is in front of the ray's start point
                 hit.point = transform.apply(Point(inverseRay.point + d * inverseRay.direction));
-                hit.normal = transform.apply(Normal(inverseRay.point + d * inverseRay.direction));
+
+                // Normal is point with negated z
+                Normal norm = inverseRay.point + d * inverseRay.direction;
+                norm(2) *= -1;
+
+                hit.normal = transform.apply(Normal(norm));
                 if (hit.normal.dot(ray.direction) > 0) {
                     hit.normal = -hit.normal;
                 }
@@ -72,7 +77,12 @@ std::vector<RayIntersection> Cone::intersect(const Ray &ray) const {
             if (d > dStart && d < dEnd) {
                 // Intersection is in front of the ray's start point
                 hit.point = transform.apply(Point(inverseRay.point + d * inverseRay.direction));
-                hit.normal = transform.apply(Normal(inverseRay.point + d * inverseRay.direction));
+
+                // Normal is point with negated z
+                Normal norm = inverseRay.point + d * inverseRay.direction;
+                norm(2) *= -1;
+
+                hit.normal = transform.apply(Normal(norm));
                 if (hit.normal.dot(ray.direction) > 0) {
                     hit.normal = -hit.normal;
                 }
@@ -84,7 +94,12 @@ std::vector<RayIntersection> Cone::intersect(const Ray &ray) const {
             if (d > dStart && d < dEnd) {
                 // Intersection is in front of the ray's start point
                 hit.point = transform.apply(Point(inverseRay.point + d * inverseRay.direction));
-                hit.normal = transform.apply(Normal(inverseRay.point + d * inverseRay.direction));
+
+                // Normal is point with negated z
+                Normal norm = inverseRay.point + d * inverseRay.direction;
+                norm(2) *= -1;
+
+                hit.normal = transform.apply(Normal(norm));
                 if (hit.normal.dot(ray.direction) > 0) {
                     hit.normal = -hit.normal;
                 }
