@@ -1,7 +1,3 @@
-//
-// Copyright (c) 2016  Thomas Farr.
-//
-
 #include <cassert>
 #include "Cube.h"
 #include "utility.h"
