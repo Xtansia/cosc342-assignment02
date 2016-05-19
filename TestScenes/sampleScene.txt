@@ -1,98 +1,120 @@
 Scene
     ambientLight 0.2 0.2 0.2
-    backgroundColour 0.75 1.0 1.0
-    renderSize 400 300
+    renderSize 800 600
+    backgroundColour 0.44 0.77 0.92
+    rayDepth 4
 End
 
-# A snowman
-
-Object Sphere # Snowman's body
-    Colour 1 1 1
-    Translate 0 -1 0
+Material floor
+    colour 0 1 0
 End
 
-Object Sphere # Snowman's torso
-    Colour 1 1 1
-    Scale 0.67
-    Translate 0 -2.5 0
+Material wall
+    colour 0.57 0.12 0
 End
 
-Object Sphere # Snowman's head
-    Colour 1 1 1
-    Scale 0.5
-    Translate 0 -3.5 0
+Material frame
+    colour 1 1 1
 End
 
-Object Sphere # Button1
-     Colour 0.25 0.25 0.25
-     Specular 1 1 1 100
-     Scale 0.1
-     Translate 0 -2.25 -0.63
-     Rotate Y -30
+Material mirror
+    colour 0.44 0.77 1
+    mirror 0.44 0.77 1
 End
 
-Object Sphere # Button2
-     Colour 0.25 0.25 0.25
-     Specular 1 1 1 100
-     Scale 0.1
-     Translate 0 -2.5 -0.67
-     Rotate Y -30
+Material ball
+    colour 0.44 0.29 0.92
+    specular 1 1 1 100
+    mirror 0.44 0.29 0.92
 End
 
-Object Sphere # Button3
-     Colour 0.25 0.25 0.25
-     Specular 1 1 1 100
-     Scale 0.1
-     Translate 0 -2.75 -0.63
-     Rotate Y -30
+# The 'floor'
+Object CSG Intersection
+    Object Cube
+        material floor
+        scale3 1 0.1 1
+    End
+
+    Object Sphere
+        material floor
+    End
+
+    scale3 5 1 5
+    translate 0 0.1 0
 End
 
-Object Sphere # Eye 1
-     Colour 0.25 0.25 0.25
-     Specular 1 1 1 100
-     Scale 0.1
-     Translate 0 -3.75 -0.45
-     Rotate Y -45
+# The 'wall'
+Object CSG Difference
+    Object CSG Difference
+        Object Cone
+            material wall
+            rotate X -90
+        End
+
+        Object Cone
+            material wall
+            scale3 0.9 0.9 1.01
+            rotate X -90
+        End
+    End
+
+    Object Cube
+        material wall
+        translate 0 -0.1 0
+    End
+
+    translate 0 -1 0
+    scale 5
 End
 
-Object Sphere # Eye 2
-     Colour 0.25 0.25 0.25
-     Specular 1 1 1 100
-     Scale 0.1
-     Translate 0 -3.75 -0.45
-     Rotate Y -15
+# The cube 'frame'
+Object CSG Difference
+    Object CSG Difference
+        Object CSG Difference
+            Object Cube
+                material frame
+            End
+
+            Object Cube
+                scale3 0.9 0.9 1.1
+                material frame
+            End
+        End
+
+        Object Cube
+            scale3 0.9 1.1 0.9
+            material frame
+        End
+    End
+
+    Object Cube
+        scale3 1.1 0.9 0.9
+        material frame
+    End
+
+    translate 0 -1 0
 End
 
-Object Sphere # Carrot nose
-    Colour 1 0.5 0
-    Scale3 0.1 0.1 0.5
-    Translate 0 -3.5 -0.5
-    Rotate Y -30
+# The 'mirror'
+Object Cube
+    material mirror
+    scale3 0.9 0.05 0.9
+    translate 0 -0.025 0
 End
 
-Object Sphere # Jaunty beret
-    Colour 1 0 0
-    Scale3 0.5 0.1 0.5
-    Rotate Z -10
-    Rotate X 10
-    Translate 0 -4 0
+# The 'ball'
+Object Sphere
+    material ball
+    scale 0.9
+    translate 0 -1 0
 End
 
-camera pinholecamera 1
-    translate 0 -3 -5 # Move camera back and up
-    rotate X -10 # look down a bit
-    translate 0 1 0
-end
+Camera PinholeCamera 3
+    rotate X -18
+    translate 0 -2.5 -5
+End
 
-light pointlight
-    location 10 -10 0
-    colour 100 100 100
-end
-
-light pointlight
-    location 0 -10 -10
-    colour 50 50 50
-end
-
-
-
+Light PointLight
+    location 0 -5 -5
+    colour 25 15 10
+End
