@@ -1,8 +1,9 @@
 Scene
     ambientLight 0.2 0.2 0.2
-    renderSize 800 600
+    renderSize 1200 900
     backgroundColour 0.44 0.77 0.92
     rayDepth 4
+    filename sample/render.png
 End
 
 Material floor
