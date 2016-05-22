@@ -1,0 +1,41 @@
+COSC342: Assignment 02 - Raytracer
+Thomas Farr - 5953956
+
+Diffuse and Specular illumination:
+        I implemented the calculation of these in Scene.computeColour,
+        I followed the Lambertian Diffuse and Phong Specular formulas
+        as given in the lecture notes.
+        I tested these by rendering the TestScenes and using ImageMagick's
+        compare tool to compare my render to the samples provided. Namely
+        the sphere and lighting scenes.
+
+Shadows:
+        I implemented shadows, by checking for an intersection with an
+        object between the hit point and the light source. I tested this by
+        comparing my output to the sample lighting scene. I noticed my shadows
+        do not seem to be as big as those in the sample, I am unsure as to why.
+
+Mirror reflections:
+       I implemented mirror reflections by casting the reflected ray and
+       computing the colour at that hit point, then adding it. I also tested
+       this by comparing my output to the sample lighting scene, where I saw
+       my reflections were identical.
+
+Cones:
+        I implemented these according to the equation for a cone x^2+y^2=z^2
+        using the quadratic equation to solve it, and capping the z bounds.
+        I again tested this by comparing my output to the provided sample for
+        the cone scene, this is how I noticed initially my normals were wrong,
+        and was able to correct them.
+
+CSG:
+        I believe I implemented these atleast somewhat correctly, as they match
+        the sample output for the provided test scenes ie intersection,
+        difference & union, aswell as for the scenes I have made and tested,
+        but I am not completely confident my implementation is correct.
+
+Other:
+        I also implemented rendering of cubes, computing intersections with
+        the planes, and checking the intersection points were in 'bounds'.
+
+My sample scene description file and image are in the sample directory.
