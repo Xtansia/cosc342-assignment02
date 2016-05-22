@@ -12,8 +12,7 @@ Diffuse and Specular illumination:
 Shadows:
         I implemented shadows, by checking for an intersection with an
         object between the hit point and the light source. I tested this by
-        comparing my output to the sample lighting scene. I noticed my shadows
-        do not seem to be as big as those in the sample, I am unsure as to why.
+        comparing my output to the sample lighting scene. 
 
 Mirror reflections:
        I implemented mirror reflections by casting the reflected ray and
