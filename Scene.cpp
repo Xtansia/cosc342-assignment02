@@ -56,7 +56,7 @@ bool Scene::isInShadowFromLight(const Point &point, const std::shared_ptr<LightS
     for (auto &obj : objects_) {
         std::vector<RayIntersection> hits = obj->intersect(shadowRay);
         for (auto &hit : hits) {
-            if (hit.distance > 0.0 && hit.distance < 1.0) {
+            if (hit.distance > 0.0 && hit.distance < shadowRay.direction.norm()) {
                 return true;
             }
         }
