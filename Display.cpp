@@ -1,7 +1,7 @@
 /* $Rev: 250 $ */
 #include "Display.h"
 
-#include <opencv2/highgui.hpp>
+#include <opencv2/highgui/highgui.hpp>
 
 Display::Display(const std::string &windowName, unsigned int width, unsigned int height, Colour colour) :
         img_(cv::Size(width, height), CV_8UC3), windowName_(windowName) {
