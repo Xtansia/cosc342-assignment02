@@ -18,23 +18,23 @@
  *
  * The scene is then rendered and saved to file, as long as there
  * is a Camera specified.
- * 
+ *
  */
 int main(int argc, char *argv[]) {
 
-    Scene scene;
+  Scene scene;
 
-    SceneReader reader(&scene);
+  SceneReader reader(&scene);
 
-    for (int i = 1; i < argc; ++i) {
-        reader.read(argv[i]);
-    }
+  for (int i = 1; i < argc; ++i) {
+    reader.read(argv[i]);
+  }
 
-    if (scene.hasCamera()) {
-        scene.render();
-    } else {
-        std::cerr << "Cannot render a scene with no camera!" << std::endl;
-    }
+  if (scene.hasCamera()) {
+    scene.render();
+  } else {
+    std::cerr << "Cannot render a scene with no camera!" << std::endl;
+  }
 
-    return 0;
+  return 0;
 }

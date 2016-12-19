@@ -14,9 +14,9 @@ Camera::~Camera() {
 }
 
 const Camera &Camera::operator=(const Camera &camera) {
-    if (this != &camera) {
-        transform = camera.transform;
-    }
+  if (this != &camera) {
+    transform = camera.transform;
+  }
 
-    return *this;
+  return *this;
 }

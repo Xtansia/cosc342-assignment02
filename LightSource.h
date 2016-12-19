@@ -8,7 +8,7 @@
 #include "Point.h"
 
 /**
- * \file 
+ * \file
  * \brief LightSource class header file.
  */
 
@@ -26,44 +26,44 @@ class LightSource {
 
 public:
 
-    Colour colour; //!< The amount and Colour of light emitted by this LightSource.
+  Colour colour; //!< The amount and Colour of light emitted by this LightSource.
 
-    /** \brief Determine how much light reaches a Point.
-     *
-     * The amount of light emitted by a LightSource is determined by its colour property,
-     * but this generally varies across the Scene. This method returns a scaling factor to
-     * apply to the colour of the light at a given Point in the Scene.
-     *
-     * \param point The Point at which light is measured.
-     * \return The proportion of the base illumination that reaches the Point.
-     */
-    virtual double getIntensityAt(const Point &point) const = 0;
+  /** \brief Determine how much light reaches a Point.
+   *
+   * The amount of light emitted by a LightSource is determined by its colour property,
+   * but this generally varies across the Scene. This method returns a scaling factor to
+   * apply to the colour of the light at a given Point in the Scene.
+   *
+   * \param point The Point at which light is measured.
+   * \return The proportion of the base illumination that reaches the Point.
+   */
+  virtual double getIntensityAt(const Point &point) const = 0;
 
-    Point location; //!< The location of this LightSource.
+  Point location; //!< The location of this LightSource.
 
 protected:
 
-    /** \brief LightSource default constructor.
-     *
-     * By default light sources are at the origin, and emit white light with a basic intensity of 1.
-     */
-    LightSource();
+  /** \brief LightSource default constructor.
+   *
+   * By default light sources are at the origin, and emit white light with a basic intensity of 1.
+   */
+  LightSource();
 
-    /** \brief LightSource copy constructor.
-     *
-     * \param lightSource The LightSource to copy.
-     */
-    LightSource(const LightSource &lightSource);
+  /** \brief LightSource copy constructor.
+   *
+   * \param lightSource The LightSource to copy.
+   */
+  LightSource(const LightSource &lightSource);
 
-    /** \brief LightSource destructor. */
-    virtual ~LightSource();
+  /** \brief LightSource destructor. */
+  virtual ~LightSource();
 
-    /** \brief LightSource assignment operator.
-     *
-     * \param lightSource The LightSource to assign to \c this.
-     * \return A reference to \c this to allow for chaining of assignment.
-     */
-    const LightSource &operator=(const LightSource &lightSource);
+  /** \brief LightSource assignment operator.
+   *
+   * \param lightSource The LightSource to assign to \c this.
+   * \return A reference to \c this to allow for chaining of assignment.
+   */
+  const LightSource &operator=(const LightSource &lightSource);
 
 
 };
