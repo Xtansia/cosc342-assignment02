@@ -9,7 +9,15 @@ os:
   - osx
 before_install: 
   - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt-get -qq update && sudo apt-get install -y libopencv-dev; fi
-  - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew tap homebrew/science && brew install opencv; fi
+  - |
+    if [ $TRAVIS_OS_NAME == osx ]; then 
+      brew update
+      brew install python
+      brew linkapps python
+      pip install -U numpy scipy matplotlib scikit-learn scikit-image
+      brew tap homebrew/science
+      brew install opencv
+    fi
 before_script:
   - mkdir build
   - cd build
