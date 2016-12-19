@@ -12,7 +12,7 @@ before_install:
   - |
     if [ $TRAVIS_OS_NAME == osx ]; then 
       brew update
-      pip uninstall numpy
+      pip uninstall -y numpy
       brew tap homebrew/science
       brew install opencv
     fi
