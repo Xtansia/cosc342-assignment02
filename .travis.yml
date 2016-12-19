@@ -12,9 +12,7 @@ before_install:
   - |
     if [ $TRAVIS_OS_NAME == osx ]; then 
       brew update
-      brew install python
-      brew linkapps python
-      pip install -U numpy scipy matplotlib scikit-learn scikit-image
+      pip uninstall numpy
       brew tap homebrew/science
       brew install opencv
     fi
