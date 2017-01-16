@@ -1,4 +1,4 @@
-# cosc342-assignment02 [![Build Status](https://travis-ci.com/Xtansia/cosc342-assignment02.svg?token=5sKpxVk7ZpUVB379u8Ec&branch=master)](https://travis-ci.com/Xtansia/cosc342-assignment02)
+# cosc342-assignment02 [![Linux & OSX Build Status](https://img.shields.io/travis/Xtansia/cosc342-assignment02/master.svg?label=linux+%26+osx&style=flat-square&maxAge=2592000)](https://travis-ci.org/Xtansia/cosc342-assignment02)
 COSC342 - Assignment 02 - Ray Tracer
 
 ## TODO	
